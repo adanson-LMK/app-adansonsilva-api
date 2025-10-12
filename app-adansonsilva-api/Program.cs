@@ -9,10 +9,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var Configuracion = new Configuracion(builder.Configuration.GetConnectionString("venta"));
+var connectionString = builder.Configuration.GetConnectionString("venta");
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("Connection string 'venta' not found.");
+}
+var Configuracion = new Configuracion(connectionString);
 builder.Services.AddSingleton(Configuracion);
 
 builder.Services.AddScoped<IProducto, CRUDProducto>();
+builder.Services.AddScoped<ICliente, CRUDCliente>();
 
 var app = builder.Build();
 
