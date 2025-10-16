@@ -1,3 +1,4 @@
+```sql
 -- Crear la base de datos y seleccionarla
 CREATE DATABASE IF NOT EXISTS bd_teksan_ventas;
 USE bd_teksan_ventas;
